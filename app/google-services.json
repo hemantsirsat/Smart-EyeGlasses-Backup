@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1071859402765",
+    "firebase_url": "https://smart-eyeglasses-app.firebaseio.com",
+    "project_id": "smart-eyeglasses-app",
+    "storage_bucket": "smart-eyeglasses-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071859402765:android:74378c2c150c9e59222d44",
+        "android_client_info": {
+          "package_name": "com.niharkoli.smarteyeglassesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071859402765-6g64a53sh4ne5ocd9semtr56cftf5jiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0V5StLhXQb2rvV-7lsG_vr6CYMWlp-cM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071859402765-6g64a53sh4ne5ocd9semtr56cftf5jiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
