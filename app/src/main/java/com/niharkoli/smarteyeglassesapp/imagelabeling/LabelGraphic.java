@@ -31,7 +31,7 @@ public class LabelGraphic extends GraphicOverlay.Graphic {
 
   private final List<FirebaseVisionImageLabel> labels;
 
-  LabelGraphic(GraphicOverlay overlay, List<FirebaseVisionImageLabel> labels) {
+  public LabelGraphic(GraphicOverlay overlay, List<FirebaseVisionImageLabel> labels) {
     super(overlay);
     this.overlay = overlay;
     this.labels = labels;

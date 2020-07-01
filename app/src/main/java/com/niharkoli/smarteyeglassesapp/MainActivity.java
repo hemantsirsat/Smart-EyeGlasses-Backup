@@ -11,6 +11,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.speech.tts.SynthesisCallback;
+import android.speech.tts.SynthesisRequest;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +40,7 @@ import com.niharkoli.smarteyeglassesapp.textrecognition.TextRecognitionProcessor
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback,
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.settings) {
+
             Intent intent = new Intent(this, SettingsActivity.class);
             intent.putExtra(SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
             startActivity(intent);
@@ -313,4 +319,5 @@ public class MainActivity extends AppCompatActivity
         Log.i(TAG, "Permission NOT granted: " + permission);
         return false;
     }
+
 }

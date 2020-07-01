@@ -16,7 +16,6 @@ package com.niharkoli.smarteyeglassesapp.facedetection;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.hardware.Camera;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -90,8 +89,7 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
             FirebaseVisionFace face = faces.get(i);
 
             int cameraFacing =
-                    frameMetadata != null ? frameMetadata.getCameraFacing() :
-                            Camera.CameraInfo.CAMERA_FACING_BACK;
+                    frameMetadata.getCameraFacing();
             FaceGraphic faceGraphic = new FaceGraphic(graphicOverlay, face, cameraFacing, overlayBitmap);
             graphicOverlay.add(faceGraphic);
         }
