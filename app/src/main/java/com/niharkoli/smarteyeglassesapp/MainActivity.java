@@ -27,10 +27,12 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetectorOptions;
+import com.niharkoli.smarteyeglassesapp.automl.AutoMLImageLabelerProcessor;
 import com.niharkoli.smarteyeglassesapp.barcodescanning.BarcodeScanningProcessor;
 import com.niharkoli.smarteyeglassesapp.common.CameraSource;
 import com.niharkoli.smarteyeglassesapp.common.CameraSourcePreview;
 import com.niharkoli.smarteyeglassesapp.common.GraphicOverlay;
+import com.niharkoli.smarteyeglassesapp.currencydetector.CurrencyDetectorProcessor;
 import com.niharkoli.smarteyeglassesapp.facedetection.FaceContourDetectorProcessor;
 import com.niharkoli.smarteyeglassesapp.facedetection.FaceDetectionProcessor;
 import com.niharkoli.smarteyeglassesapp.imagelabeling.ImageLabelingProcessor;
@@ -49,13 +51,13 @@ public class MainActivity extends AppCompatActivity
 
     private static final String FACE_DETECTION = "Face Detection";
     private static final String OBJECT_DETECTION = "Object Detection";
-    private static final String AUTOML_IMAGE_LABELING = "AutoML Vision Edge";
+    private static final String CURRENCY_DETECTION = "Currency Detection";
     private static final String TEXT_DETECTION = "Text Detection";
     private static final String BARCODE_DETECTION = "Barcode Detection";
     private static final String IMAGE_LABEL_DETECTION = "Label Detection";
-    private static final String CLASSIFICATION_QUANT = "Classification (quantized)";
-    private static final String CLASSIFICATION_FLOAT = "Classification (float)";
     private static final String FACE_CONTOUR = "Face Contour";
+    private static final String AUTOML_IMAGE_LABELING = "AutoML Vision Edge";
+
     private static final String TAG = "LivePreviewActivity";
     private static final int PERMISSION_REQUESTS = 1;
 
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity
         options.add(FACE_DETECTION);
         options.add(FACE_CONTOUR);
         options.add(BARCODE_DETECTION);
+        options.add(CURRENCY_DETECTION);
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style,
@@ -163,6 +166,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
     private void createCameraSource(String model) {
         // If there's no existing cameraSource, create one.
         if (cameraSource == null) {
@@ -200,6 +204,9 @@ public class MainActivity extends AppCompatActivity
                 case BARCODE_DETECTION:
                     Log.i(TAG, "Using Barcode Detector Processor");
                     cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor());
+                    break;
+                case CURRENCY_DETECTION:
+                    cameraSource.setMachineLearningFrameProcessor(new AutoMLImageLabelerProcessor(this));
                     break;
                 default:
                     Log.e(TAG, "Unknown model: " + model);
