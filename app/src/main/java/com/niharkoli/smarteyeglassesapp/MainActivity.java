@@ -11,10 +11,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.speech.tts.SynthesisCallback;
-import android.speech.tts.SynthesisRequest;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,12 +23,11 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.ml.vision.objects.FirebaseVisionObjectDetectorOptions;
-import com.niharkoli.smarteyeglassesapp.automl.AutoMLImageLabelerProcessor;
+import com.niharkoli.smarteyeglassesapp.currencydetector.CurrencyLabelerProcessor;
 import com.niharkoli.smarteyeglassesapp.barcodescanning.BarcodeScanningProcessor;
 import com.niharkoli.smarteyeglassesapp.common.CameraSource;
 import com.niharkoli.smarteyeglassesapp.common.CameraSourcePreview;
 import com.niharkoli.smarteyeglassesapp.common.GraphicOverlay;
-import com.niharkoli.smarteyeglassesapp.currencydetector.CurrencyDetectorProcessor;
 import com.niharkoli.smarteyeglassesapp.facedetection.FaceContourDetectorProcessor;
 import com.niharkoli.smarteyeglassesapp.facedetection.FaceDetectionProcessor;
 import com.niharkoli.smarteyeglassesapp.imagelabeling.ImageLabelingProcessor;
@@ -42,7 +37,6 @@ import com.niharkoli.smarteyeglassesapp.textrecognition.TextRecognitionProcessor
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback,
@@ -65,6 +59,7 @@ public class MainActivity extends AppCompatActivity
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
     private String selectedModel = FACE_CONTOUR;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +201,7 @@ public class MainActivity extends AppCompatActivity
                     cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor());
                     break;
                 case CURRENCY_DETECTION:
-                    cameraSource.setMachineLearningFrameProcessor(new AutoMLImageLabelerProcessor(this));
+                    cameraSource.setMachineLearningFrameProcessor(new CurrencyLabelerProcessor(this));
                     break;
                 default:
                     Log.e(TAG, "Unknown model: " + model);
@@ -257,6 +252,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
+        //tts.stopSpeech();
         preview.stop();
     }
 
@@ -326,5 +322,4 @@ public class MainActivity extends AppCompatActivity
         Log.i(TAG, "Permission NOT granted: " + permission);
         return false;
     }
-
 }

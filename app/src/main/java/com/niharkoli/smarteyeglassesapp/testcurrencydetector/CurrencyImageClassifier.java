@@ -1,4 +1,4 @@
-package com.niharkoli.smarteyeglassesapp.currencydetector;
+package com.niharkoli.smarteyeglassesapp.testcurrencydetector;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,20 +9,15 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.os.SystemClock;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.ml.common.FirebaseMLException;
-import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
-import com.google.firebase.ml.common.modeldownload.FirebaseModelManager;
 import com.google.firebase.ml.custom.FirebaseCustomLocalModel;
-import com.google.firebase.ml.custom.FirebaseCustomRemoteModel;
 import com.google.firebase.ml.custom.FirebaseModelDataType;
 import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions;
 import com.google.firebase.ml.custom.FirebaseModelInputs;

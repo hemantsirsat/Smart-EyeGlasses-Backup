@@ -1,4 +1,4 @@
-package com.niharkoli.smarteyeglassesapp.currencydetector;
+package com.niharkoli.smarteyeglassesapp.testcurrencydetector;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

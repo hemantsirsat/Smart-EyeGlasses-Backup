@@ -1,4 +1,4 @@
-package com.niharkoli.smarteyeglassesapp.automl;
+package com.niharkoli.smarteyeglassesapp.currencydetector;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,37 +8,28 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.ml.common.FirebaseMLException;
-import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
-import com.google.firebase.ml.common.modeldownload.FirebaseModelManager;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.automl.FirebaseAutoMLLocalModel;
-import com.google.firebase.ml.vision.automl.FirebaseAutoMLRemoteModel;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceAutoMLImageLabelerOptions;
-import com.niharkoli.smarteyeglassesapp.R;
 import com.niharkoli.smarteyeglassesapp.common.CameraImageGraphic;
 import com.niharkoli.smarteyeglassesapp.common.FrameMetadata;
 import com.niharkoli.smarteyeglassesapp.common.GraphicOverlay;
-import com.niharkoli.smarteyeglassesapp.common.PreferenceUtils;
 import com.niharkoli.smarteyeglassesapp.common.VisionProcessorBase;
-import com.niharkoli.smarteyeglassesapp.currencydetector.CurrencyGraphic;
-import com.niharkoli.smarteyeglassesapp.imagelabeling.LabelGraphic;
 
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * AutoML image labeler Demo.
  */
-public class AutoMLImageLabelerProcessor
+public class CurrencyLabelerProcessor
     extends VisionProcessorBase<List<FirebaseVisionImageLabel>> {
 
   private static final String TAG = "ODAutoMLILProcessor";
@@ -54,7 +45,7 @@ public class AutoMLImageLabelerProcessor
    */
 
 
-  public AutoMLImageLabelerProcessor(Context context) throws FirebaseMLException {
+  public CurrencyLabelerProcessor(Context context) throws FirebaseMLException {
     this.context = context;
 
       Log.d(TAG, "Local model used.");
