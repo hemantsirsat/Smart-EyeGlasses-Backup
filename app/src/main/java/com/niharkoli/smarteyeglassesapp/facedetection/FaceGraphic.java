@@ -19,12 +19,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.firebase.ml.vision.common.FirebaseVisionPoint;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceLandmark;
 import com.niharkoli.smarteyeglassesapp.common.GraphicOverlay;
+
+import java.util.Locale;
 
 
 /**
@@ -47,6 +52,9 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
     private volatile FirebaseVisionFace firebaseVisionFace;
 
     private final Bitmap overlayBitmap;
+
+    TextToSpeech tts;
+    String text;
 
     public FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing, Bitmap overlayBitmap) {
         super(overlay);
@@ -135,6 +143,31 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_EAR);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_EYE);
         drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.MOUTH_RIGHT);
+
+
+        text = "face detected";
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.US);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("error", "This Language is not supported");
+                    } else {
+                        if ("".equals(text)) {
+                            text = "Please enter some text to speak.";
+                        }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                        } else {
+                            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                    }
+                } else {
+                    Log.e("error", "Failed to Initialize");
+                }
+            }
+        });
     }
 
     private void drawLandmarkPosition(Canvas canvas, FirebaseVisionFace face, int landmarkID) {

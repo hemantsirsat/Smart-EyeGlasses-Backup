@@ -53,7 +53,8 @@ public class CurrencyDetectorProcessor implements VisionImageProcessor {
                                         result);
                                 Bitmap bitmap = BitmapUtils.getBitmap(data, frameMetadata);
                                 CameraImageGraphic imageGraphic =
-                                        new CameraImageGraphic(graphicOverlay, bitmap);
+                                        new CameraImageGraphic(graphicOverlay,
+                                                bitmap);
                                 graphicOverlay.clear();
                                 graphicOverlay.add(imageGraphic);
                                 graphicOverlay.add(currencyGraphic);
