@@ -57,7 +57,7 @@ public class CurrencyLabelGraphic extends GraphicOverlay.Graphic {
         float y = overlay.getHeight() / 2.0f;
 
         for (FirebaseVisionImageLabel label : labels) {
-            if (label.getConfidence() > 0.9) {
+            if (label.getConfidence() > 0.85) {
                 canvas.drawText(label.getText(), x, y, textPaint);
                 canvas.drawText(String.valueOf(label.getConfidence()), x + 150, y, textPaint);
                 y = y - 62.0f;
