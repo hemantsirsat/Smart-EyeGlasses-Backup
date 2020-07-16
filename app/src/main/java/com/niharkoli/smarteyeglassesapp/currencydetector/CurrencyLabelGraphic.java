@@ -75,9 +75,9 @@ public class CurrencyLabelGraphic extends GraphicOverlay.Graphic {
                                     text = "Please enter some text to speak.";
                                 }
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                    tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                                    //tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
                                 } else {
-                                    tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                                   // tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                                 }
                             }
                         } else {

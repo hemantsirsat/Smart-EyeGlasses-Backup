@@ -43,14 +43,13 @@ public class MainActivity extends AppCompatActivity
         AdapterView.OnItemSelectedListener,
         CompoundButton.OnCheckedChangeListener{
 
-    private static final String FACE_DETECTION = "Face Detection";
-    private static final String OBJECT_DETECTION = "Object Detection";
-    private static final String CURRENCY_DETECTION = "Currency Detection";
-    private static final String TEXT_DETECTION = "Text Detection";
-    private static final String BARCODE_DETECTION = "Barcode Detection";
-    private static final String IMAGE_LABEL_DETECTION = "Label Detection";
-    private static final String FACE_CONTOUR = "Face Contour";
-    private static final String AUTOML_IMAGE_LABELING = "AutoML Vision Edge";
+    private static final String FACE_DETECTION = "face detect";
+    private static final String OBJECT_DETECTION = "object detect";
+    private static final String CURRENCY_DETECTION = "currency detect";
+    private static final String BARCODE_READER = "barcode reader";
+    private static final String TEXT_DETECTION = "text detect";
+    private static final String LABEL_DETECTION = "label detect";
+    private static final String FACE_CONTOUR = "face contour";
 
     private static final String TAG = "LivePreviewActivity";
     private static final int PERMISSION_REQUESTS = 1;
@@ -58,13 +57,15 @@ public class MainActivity extends AppCompatActivity
     private CameraSource cameraSource = null;
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
-    private String selectedModel = FACE_CONTOUR;
+    private String selectedModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        selectedModel = getIntent().getStringExtra("ModuleName");
 
         preview = findViewById(R.id.firePreview);
         if (preview == null) {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity
             Log.d(TAG, "graphicOverlay is null");
         }
 
+        /*
         Spinner spinner = findViewById(R.id.spinner);
         List<String> options = new ArrayList<>();
         options.add(TEXT_DETECTION);
@@ -94,6 +96,8 @@ public class MainActivity extends AppCompatActivity
         spinner.setAdapter(dataAdapter);
         spinner.setOnItemSelectedListener(this);
 
+         */
+
         ToggleButton facingSwitch = findViewById(R.id.facingSwitch);
         facingSwitch.setOnCheckedChangeListener(this);
         // Hide the toggle button if there is only 1 camera
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public synchronized void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
+       /* // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
         selectedModel = parent.getItemAtPosition(pos).toString();
         Log.d(TAG, "Selected model: " + selectedModel);
@@ -122,6 +126,8 @@ public class MainActivity extends AppCompatActivity
         } else {
             getRuntimePermissions();
         }
+
+        */
     }
 
     @Override
@@ -184,7 +190,7 @@ public class MainActivity extends AppCompatActivity
                     cameraSource.setMachineLearningFrameProcessor(
                             new ObjectDetectorProcessor(objectDetectorOptions));
                     break;
-                case IMAGE_LABEL_DETECTION:
+                case LABEL_DETECTION:
                     Log.i(TAG, "Using Image Label Detector Processor");
                     cameraSource.setMachineLearningFrameProcessor(new ImageLabelingProcessor());
                     break;
@@ -196,7 +202,7 @@ public class MainActivity extends AppCompatActivity
                     Log.i(TAG, "Using Face Contour Detector Processor");
                     cameraSource.setMachineLearningFrameProcessor(new FaceContourDetectorProcessor());
                     break;
-                case BARCODE_DETECTION:
+                case BARCODE_READER:
                     Log.i(TAG, "Using Barcode Detector Processor");
                     cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor());
                     break;
