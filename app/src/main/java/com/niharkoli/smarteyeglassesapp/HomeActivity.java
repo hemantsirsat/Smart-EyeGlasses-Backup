@@ -4,8 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +20,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-//for toast
-import android.widget.Toast;
-
 public class HomeActivity extends AppCompatActivity {
-
+    TextToSpeech tts;
     private static final String FACE_DETECTION = "face detect";
     private static final String OBJECT_DETECTION = "object detect";
     private static final String CURRENCY_DETECTION = "currency detect";
@@ -65,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+
     private void recognizeModule(String speechResult){
         Intent intent = new Intent(HomeActivity.this,MainActivity.class);
         switch(speechResult){
@@ -100,21 +101,43 @@ public class HomeActivity extends AppCompatActivity {
                 Date date = Calendar.getInstance().getTime();
                 DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yyyy");
                 String strDate = dateFormat.format(date);
-
-                Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();
-
+                if(strDate!=null) {
+                    date_time(strDate);
+                }
                 break;
             case TIME:
                 Date Time = Calendar.getInstance().getTime();
                 DateFormat timeFormat = new SimpleDateFormat("h:mm a");
                 String strTime = timeFormat.format(Time);
-
-                Toast.makeText(getApplicationContext(),strTime,Toast.LENGTH_SHORT).show();
-
+                if(strTime!=null) {
+                    date_time(strTime);
+                }
                 break;
             default:
                 Toast.makeText(this,"NO TEXT MATCHED!",Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+    public void date_time(String text){
+        tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.US);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("error", "This Language is not supported");
+                    }else{
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                        } else {
+                            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                    }
+                } else {
+                    Log.e("error", "Failed to Initialize");
+                }
+            }
+        });
     }
 }
