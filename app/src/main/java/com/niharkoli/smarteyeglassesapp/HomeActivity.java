@@ -12,6 +12,13 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+//for toast
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -22,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TEXT_DETECTION = "text detect";
     private static final String LABEL_DETECTION = "label detect";
     private static final String FACE_CONTOUR = "face contour";
+    private static final String DATE_ = "date";
+    private static final String TIME = "time";
 
 
     @Override
@@ -86,6 +95,22 @@ public class HomeActivity extends AppCompatActivity {
             case FACE_CONTOUR:
                 intent.putExtra("ModuleName",FACE_CONTOUR);
                 startActivity(intent);
+                break;
+            case DATE_:
+                Date date = Calendar.getInstance().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yyyy");
+                String strDate = dateFormat.format(date);
+
+                Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();
+
+                break;
+            case TIME:
+                Date Time = Calendar.getInstance().getTime();
+                DateFormat timeFormat = new SimpleDateFormat("h:mm a");
+                String strTime = timeFormat.format(Time);
+
+                Toast.makeText(getApplicationContext(),strTime,Toast.LENGTH_SHORT).show();
+
                 break;
             default:
                 Toast.makeText(this,"NO TEXT MATCHED!",Toast.LENGTH_SHORT).show();

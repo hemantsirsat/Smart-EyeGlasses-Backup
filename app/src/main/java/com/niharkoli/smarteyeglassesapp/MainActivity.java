@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TEXT_DETECTION = "text detect";
     private static final String LABEL_DETECTION = "label detect";
     private static final String FACE_CONTOUR = "face contour";
+    private static final String DATE = "date";
 
     private static final String TAG = "LivePreviewActivity";
     private static final int PERMISSION_REQUESTS = 1;
