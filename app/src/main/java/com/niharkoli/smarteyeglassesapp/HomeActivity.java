@@ -2,8 +2,12 @@ package com.niharkoli.smarteyeglassesapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -12,6 +16,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -22,6 +32,9 @@ import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
     TextToSpeech tts;
+
+    private FusedLocationProviderClient fusedLocationClient;
+
     private static final String FACE_DETECTION = "face detect";
     private static final String OBJECT_DETECTION = "object detect";
     private static final String CURRENCY_DETECTION = "currency detect";
@@ -31,13 +44,13 @@ public class HomeActivity extends AppCompatActivity {
     private static final String FACE_CONTOUR = "face contour";
     private static final String DATE_ = "date";
     private static final String TIME = "time";
+    private static final String LOCATION = "location";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
     }
 
     public void recognize(View view) {
@@ -113,11 +126,43 @@ public class HomeActivity extends AppCompatActivity {
                     date_time(strTime);
                 }
                 break;
+            case LOCATION:
+                getlocation();
+                //Toast.makeText(this,"TEXT MATCHED!",Toast.LENGTH_SHORT).show();
+                break;
             default:
                 Toast.makeText(this,"NO TEXT MATCHED!",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
+
+    public void getlocation(){
+        FusedLocationProviderClient fusedLocationProviderClient;
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
+            {
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if(location!=null) {
+                        Double lat = location.getLatitude();
+                        Double lon = location.getLongitude();
+                        //date_time(String.valueOf(lat));
+
+                    }
+                }
+            });
+            }
+            else
+            {
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
+            }
+    }
+
+
+
+    //tts for date and time
     public void date_time(String text){
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
