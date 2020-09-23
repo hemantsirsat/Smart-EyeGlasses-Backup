@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -23,6 +24,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Date;
@@ -47,11 +52,35 @@ public class HomeActivity extends AppCompatActivity {
     private static final String LOCATION = "location";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
     }
+
+    public class DownloadTask extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                String result = "";
+                URL url = new URL(strings[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream in = connection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(in);
+                int data = reader.read();
+                while(data != -1){
+                    char current =(char) data;
+                    result += current;
+                    data = reader.read();
+                }
+                return result;
+            }catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
 
     public void recognize(View view) {
 
