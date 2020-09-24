@@ -23,6 +23,10 @@ public class HomeActivity extends AppCompatActivity {
     private static final String LABEL_DETECTION = "label detect";
     private static final String FACE_CONTOUR = "face contour";
 
+    private static final String PHONE_CALL = "call";
+    private static final String MESSAGE = "message";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void recognizeModule(String speechResult){
         Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+        Intent intent2 = new Intent(HomeActivity.this,Call_Message.class);
         switch(speechResult){
             case FACE_DETECTION:
                 intent.putExtra("ModuleName",FACE_DETECTION);
@@ -86,6 +91,16 @@ public class HomeActivity extends AppCompatActivity {
             case FACE_CONTOUR:
                 intent.putExtra("ModuleName",FACE_CONTOUR);
                 startActivity(intent);
+                break;
+
+            case PHONE_CALL:
+                intent2.putExtra("ModuleName",PHONE_CALL);
+                startActivity(intent2);
+                break;
+
+            case MESSAGE:
+                intent2.putExtra("ModuleName",MESSAGE);
+                startActivity(intent2);
                 break;
             default:
                 Toast.makeText(this,"NO TEXT MATCHED!",Toast.LENGTH_SHORT).show();
