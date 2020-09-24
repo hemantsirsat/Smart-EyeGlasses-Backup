@@ -65,24 +65,20 @@ public class Call_Message extends AppCompatActivity {
                 if (phone.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Enter Number!", Toast.LENGTH_SHORT).show();
                 } else {
-
-                    if (ContextCompat.checkSelfPermission(Call_Message.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(Call_Message.this, new String[]{Manifest.permission.CALL_PHONE},1);
+                    if (message.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Please Message!", Toast.LENGTH_SHORT).show();
                     }
-
                     else {
-                        if (message.isEmpty()) {
-                            Toast.makeText(getApplicationContext(), "Please Message!", Toast.LENGTH_SHORT).show();
-                        } else {
 
-                            if (ContextCompat.checkSelfPermission(Call_Message.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                                ActivityCompat.requestPermissions(Call_Message.this, new String[]{Manifest.permission.SEND_SMS}, 1);
-                            } else {
-                                SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(phone, null, message, null, null);
-                                Toast.makeText(getApplicationContext(), "Message Sent", Toast.LENGTH_SHORT).show();
+                        if (ContextCompat.checkSelfPermission(Call_Message.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(Call_Message.this, new String[]{Manifest.permission.SEND_SMS},1);
+                        }
+                        else
+                        {
+                            SmsManager smsManager = SmsManager.getDefault();
+                            smsManager.sendTextMessage(phone,null,message,null,null);
+                            Toast.makeText(getApplicationContext(),  "Message Sent", Toast.LENGTH_SHORT).show();
 
-                            }
                         }
                     }
                 }
