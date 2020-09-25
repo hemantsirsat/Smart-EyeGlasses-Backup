@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
     public class DownloadTask extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... strings) {
-            try{
+            try {
                 String result = "";
                 URL url = new URL(strings[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -70,18 +70,18 @@ public class HomeActivity extends AppCompatActivity {
                 InputStream in = connection.getInputStream();
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
-                while(data != -1){
-                    char current =(char) data;
+                while (data != -1) {
+                    char current = (char) data;
                     result += current;
                     data = reader.read();
                 }
                 return result;
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
         }
-
+    }
     public void recognize(View view) {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
