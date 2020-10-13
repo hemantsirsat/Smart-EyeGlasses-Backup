@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         if (requestCode == 1000) {
             if (resultCode == RESULT_OK && null != data) {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
                 recognizeModule(result.get(0));
             }
         }
@@ -94,8 +95,11 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case PHONE_CALL:
-                intent2.putExtra("ModuleName",PHONE_CALL);
-                startActivity(intent2);
+//                intent2.putExtra("ModuleName",PHONE_CALL);
+//                startActivity(intent2);
+                Intent i = new Intent(HomeActivity.this, Phone.class);
+//                i.putExtra("number", test);
+                startActivity(i);
                 break;
 
             case MESSAGE:
