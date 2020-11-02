@@ -95,16 +95,14 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case PHONE_CALL:
-//                intent2.putExtra("ModuleName",PHONE_CALL);
-//                startActivity(intent2);
-                Intent i = new Intent(HomeActivity.this, Phone.class);
-//                i.putExtra("number", test);
-                startActivity(i);
+                Intent p = new Intent(HomeActivity.this, Phone.class);
+                startActivity(p);
                 break;
 
             case MESSAGE:
-                intent2.putExtra("ModuleName",MESSAGE);
-                startActivity(intent2);
+
+                Intent m = new Intent(HomeActivity.this, Message.class);
+                startActivity(m);
                 break;
             default:
                 Toast.makeText(this,"NO TEXT MATCHED!",Toast.LENGTH_SHORT).show();

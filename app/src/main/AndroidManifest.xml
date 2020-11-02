@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -19,7 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents">
-        <activity android:name=".Phone"></activity>
+        <activity android:name=".message_helper"></activity>
+        <activity android:name=".Message" />
+        <activity android:name=".call_helper" />
+        <activity android:name=".Phone" />
         <activity android:name=".Call_Message" />
         <activity android:name=".HomeActivity">
             <intent-filter>

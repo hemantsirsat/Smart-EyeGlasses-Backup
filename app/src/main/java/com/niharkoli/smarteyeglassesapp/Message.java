@@ -11,13 +11,13 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,19 +25,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Phone extends AppCompatActivity {
-
-    public static final String TAG = "MYJ PHONE";
+public class Message extends AppCompatActivity {
+    public static final String TAG = "MYJ MESSAGE";
     private TextToSpeech mTTS;
     TextView text_view;
-
-
     ArrayList<String> display = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone);
+        setContentView(R.layout.activity_message);
 
         text_view = findViewById(R.id.text_view);
 
@@ -75,6 +72,9 @@ public class Phone extends AppCompatActivity {
 
     }
 
+
+
+
     public void startListening(){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -88,10 +88,10 @@ public class Phone extends AppCompatActivity {
         }
 
 
-
-
-
     }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -102,7 +102,7 @@ public class Phone extends AppCompatActivity {
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 Log.e("Check onActivity",result.get(0));
                 getcontact(result.get(0));
-           }
+            }
         }
 
 
@@ -114,38 +114,38 @@ public class Phone extends AppCompatActivity {
     private void getcontact(String req_name) {
         Cursor cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
 
-            ArrayList<String> similar_names = new ArrayList<String>();
+        ArrayList<String> similar_names = new ArrayList<String>();
 
-            while (cursor.moveToNext()) {
-                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                if (name.equalsIgnoreCase(req_name)) {
-                    make_call(name , phone);
-                    break;
-                }
-                else if (name.toLowerCase().contains(req_name.toLowerCase())) {
-                    if(!similar_names.contains(name))
-                        similar_names.add(name);
-                }
-
+            if (name.equalsIgnoreCase(req_name)) {
+                message(name , phone);
+                break;
             }
-            if (similar_names.isEmpty()) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Contact Not Found!", Toast.LENGTH_SHORT);
-                toast.show();
+            else if (name.toLowerCase().contains(req_name.toLowerCase())) {
+                if(!similar_names.contains(name))
+                    similar_names.add(name);
             }
-            else {
+
+        }
+        if (similar_names.isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Contact Not Found!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else {
 //                Intent i = new Intent(this, call_helper.class);
 //                i.putExtra("my_list", similar_names);
 
-                text_view = findViewById(R.id.text_view);
+            text_view = findViewById(R.id.text_view);
 
-                for (int i = 0; i < similar_names.size(); i++) {
-                    display.add(similar_names.get(i) +"\n");
-                    text_view.setText(display.toString());
-                }
-                mTTS.setSpeechRate((float) 0.7);
-                mTTS.speak(similar_names.toString(), TextToSpeech.QUEUE_FLUSH, null);
+            for (int i = 0; i < similar_names.size(); i++) {
+                display.add(similar_names.get(i) +"\n");
+                text_view.setText(display.toString());
+            }
+            mTTS.setSpeechRate((float) 0.7);
+            mTTS.speak(similar_names.toString(), TextToSpeech.QUEUE_FLUSH, null);
 
 
             Runnable r = new Runnable() {
@@ -160,33 +160,12 @@ public class Phone extends AppCompatActivity {
             Handler h = new Handler();
             h.postDelayed(r, 2000*similar_names.size());
 
-            }
+        }
 
 
 //        Log.e(TAG, "List : "+ similar_names);
     }
 
-
-
-    public void  make_call(String name, String phone){
-        if (phone.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please Enter Number!", Toast.LENGTH_SHORT).show();
-        } else {
-            String s = "tel:" + phone;
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse(s));
-
-            if (ContextCompat.checkSelfPermission(Phone.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(Phone.this, new String[]{Manifest.permission.CALL_PHONE},1);
-            }
-            else
-            {
-//                call_hint(name);
-                startActivity(intent);
-                finish();
-            }
-        }
-    }
 
 
 
@@ -225,8 +204,6 @@ public class Phone extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode==1){
@@ -242,6 +219,31 @@ public class Phone extends AppCompatActivity {
     }
 
 
+    private void message(String name, String phone){
 
 
+        Intent i = new Intent(this, message_helper.class);
+        i.putExtra("phone",phone);
+        startActivity(i);
+//        if (phone.isEmpty()) {
+//            Toast.makeText(getApplicationContext(), "Please Enter Number!", Toast.LENGTH_SHORT).show();
+//        } else {
+//            if (message.isEmpty()) {
+//                Toast.makeText(getApplicationContext(), "Please Message!", Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+//
+//                if (ContextCompat.checkSelfPermission(Call_Message.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(Call_Message.this, new String[]{Manifest.permission.SEND_SMS},1);
+//                }
+//                else
+//                {
+//                    SmsManager smsManager = SmsManager.getDefault();
+//                    smsManager.sendTextMessage(phone,null,message,null,null);
+//                    Toast.makeText(getApplicationContext(),  "Message Sent", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        }
+    }
 }
