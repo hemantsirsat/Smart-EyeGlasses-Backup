@@ -103,4 +103,34 @@
     <string name="pref_entries_automl_models_local">Local</string>
     <string name="pref_key_live_preview_automl_remote_model_choices" translatable="false">lparmc</string>
     <string name="SpeechNotes">Face Detection :- face detect\nObject Detection :- object detect \nText Detection :- text detect\nCurrency Detection :- currency detect \nLabel Detection :- label detect\nBarcode Reader :- barcode reader\nFace Contour :- face contour</string>
+
+
+    <!-- Login Activity String -->
+    <string name="loginHello">Hello there!</string>
+    <string name="loginWelcome">Welcome</string>
+    <string name="loginMessage">Enter your Mobile Number to continue</string>
+    <string name="OTP_Message">Enter the OTP send to <b>+91 - 987654321</b></string>
+
+
+
+    <string-array name="sex_array">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="issue_array">
+        <item>-Select-</item>
+        <item>Assault</item>
+        <item>Murder</item>
+        <item>Robbery</item>
+        <item>Other</item>
+
+    </string-array>
+
+    <!--TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_title">Sending alert!</string>
+    <string name="alert_sub_title">Hold on for a second...</string>
+
 </resources>
