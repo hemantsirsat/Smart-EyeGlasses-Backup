@@ -47,12 +47,35 @@ public class InfoActivity extends AppCompatActivity {
     private TextInputEditText mEmailEditText;
     private TextInputEditText mAgeEditText;
     private TextInputEditText mAddress1EditText;
-    private TextInputEditText mAddress2EditText;
 
     private String UID;
     private String DOB;
     private Spinner mSex;
     private String phoneNumber;
+
+    private static final String EC1_KEY_FNAME = "EC1 Fname";
+    private static final String EC1_KEY_LNAME = "EC1 Lname";
+    private static final String EC1_KEY_HOME_ADDRESS = "EC1 HomeAddress";
+    private static final String EC1_KEY_PHONE = "EC1 PhoneNumber";
+
+    private TextInputEditText EC1_mFnameEditText;
+    private TextInputEditText EC1_mLnameEditText;
+    private TextInputEditText EC1_mAddress1EditText;
+    private TextInputEditText EC1_mphone;
+
+
+    private static final String EC2_KEY_FNAME = "EC2 Fname";
+    private static final String EC2_KEY_LNAME = "EC2 Lname";
+    private static final String EC2_KEY_HOME_ADDRESS = "EC2 HomeAddress";
+    private static final String EC2_KEY_PHONE = "EC2 PhoneNumber";
+
+    private TextInputEditText EC2_mFnameEditText;
+    private TextInputEditText EC2_mLnameEditText;
+    private TextInputEditText EC2_mAddress1EditText;
+    private TextInputEditText EC2_mphone;
+
+
+
 
     FirebaseAuth mAuth;
 
@@ -76,7 +99,18 @@ public class InfoActivity extends AppCompatActivity {
         mEmailEditText = findViewById(R.id.EmailEditText);
         mAgeEditText = findViewById(R.id.AgeEditText);
         mAddress1EditText = findViewById(R.id.Address1EditText);
-        mAddress2EditText = findViewById(R.id.Address2EditText);
+
+
+        EC1_mFnameEditText = findViewById(R.id.EC1_FNameEditText);
+        EC1_mLnameEditText = findViewById(R.id.EC1_LNameEditText);
+        EC1_mAddress1EditText = findViewById(R.id.EC1_Address1EditText);
+        EC1_mphone = findViewById(R.id.EC1_phone_EditText);
+
+        EC2_mFnameEditText = findViewById(R.id.EC2_FNameEditText);
+        EC2_mLnameEditText = findViewById(R.id.EC2_LNameEditText);
+        EC2_mAddress1EditText = findViewById(R.id.EC2_Address1EditText);
+        EC2_mphone = findViewById(R.id.EC2_phone_EditText);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -137,10 +171,26 @@ public class InfoActivity extends AppCompatActivity {
         DOB = mDOBEditText.getText().toString();
         String age = mAgeEditText.getText().toString();
         String homeAdd = mAddress1EditText.getText().toString();
-        String offAdd = mAddress2EditText.getText().toString();
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
-        if (fname.trim().isEmpty() || lname.trim().isEmpty() || email.trim().isEmpty() || sex.trim().isEmpty() || DOB.trim().isEmpty() || age.trim().isEmpty() || homeAdd.trim().isEmpty() || offAdd.trim().isEmpty()) {
+
+        String EC1_fname = EC1_mFnameEditText.getText().toString();
+        String EC1_lname = EC1_mLnameEditText.getText().toString();
+        String EC1_homeAdd = EC1_mAddress1EditText.getText().toString();
+        String EC1_phone_ = EC1_mphone.getText().toString();
+
+        String EC2_fname = EC2_mFnameEditText.getText().toString();
+        String EC2_lname = EC2_mLnameEditText.getText().toString();
+        String EC2_homeAdd = EC2_mAddress1EditText.getText().toString();
+        String EC2_phone_ = EC2_mphone.getText().toString();
+
+
+
+        if (fname.trim().isEmpty() || lname.trim().isEmpty() || email.trim().isEmpty() || sex.trim().isEmpty() || DOB.trim().isEmpty() || age.trim().isEmpty() || homeAdd.trim().isEmpty()
+                || EC1_fname.trim().isEmpty() || EC1_lname.trim().isEmpty() || EC1_homeAdd.trim().isEmpty() || EC1_phone_.trim().isEmpty()
+                || EC2_fname.trim().isEmpty() || EC2_lname.trim().isEmpty() || EC2_homeAdd.trim().isEmpty() || EC2_phone_.trim().isEmpty()
+
+        ) {
             if (fname.trim().isEmpty()) {
                 mFnameEditText.setError("Enter a Value");
             }
@@ -159,21 +209,37 @@ public class InfoActivity extends AppCompatActivity {
             if (homeAdd.trim().isEmpty()) {
                 mAddress1EditText.setError("Enter a Value");
             }
-            if (offAdd.trim().isEmpty()) {
-                mAddress2EditText.setError("Enter a Value");
+
+
+            if (EC1_fname.trim().isEmpty()) {
+                EC1_mFnameEditText.setError("Enter a Value");
             }
+            if (EC1_lname.trim().isEmpty()) {
+                EC1_mLnameEditText.setError("Enter a Value");
+            }
+            if (EC1_homeAdd.trim().isEmpty()) {
+                EC1_mAddress1EditText.setError("Enter a Value");
+            }
+            if (EC1_phone_.trim().isEmpty()) {
+                EC1_mphone.setError("Enter a Value");
+            }
+
+            if (EC2_fname.trim().isEmpty()) {
+                EC2_mFnameEditText.setError("Enter a Value");
+            }
+            if (EC2_lname.trim().isEmpty()) {
+                EC2_mLnameEditText.setError("Enter a Value");
+            }
+            if (EC2_homeAdd.trim().isEmpty()) {
+                EC2_mAddress1EditText.setError("Enter a Value");
+            }
+            if (EC2_phone_.trim().isEmpty()) {
+                EC2_mphone.setError("Enter a Value");
+            }
+
             return;
         }
 
-        if (!isValidEmail(email)) {
-            mEmailEditText.setError("Not a Valid Email!");
-            return;
-        }
-
-        if (Integer.parseInt(age) < 18) {
-            mAgeEditText.setError("Age should be greater than 18");
-            return;
-        }
 
         showProgressDialogWithTitle("Registering User!", "Hold on...");
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -189,8 +255,17 @@ public class InfoActivity extends AppCompatActivity {
         data.put(KEY_SEX, sex);
         data.put(KEY_AGE, age);
         data.put(KEY_HOME_ADDRESS, homeAdd);
-        data.put(KEY_OFFICE_ADDRESS, offAdd);
         data.put(KEY_PHONE, phoneNumber);
+
+        data.put(EC1_KEY_FNAME, EC1_fname);
+        data.put(EC1_KEY_LNAME, EC1_lname);
+        data.put(EC1_KEY_HOME_ADDRESS, EC1_homeAdd);
+        data.put(EC1_KEY_PHONE, EC1_phone_);
+
+        data.put(EC2_KEY_FNAME, EC2_fname);
+        data.put(EC2_KEY_LNAME, EC2_lname);
+        data.put(EC2_KEY_HOME_ADDRESS, EC2_homeAdd);
+        data.put(EC2_KEY_PHONE, EC2_phone_);
 
         //firestore
         db.collection("users").document(UID).set(data)
