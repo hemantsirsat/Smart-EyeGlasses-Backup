@@ -11,12 +11,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
-
     private TextInputEditText editTextPhoneNumber;
-
-
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +20,13 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
         if(mAuth.getCurrentUser() != null) {
             goToMainActivity();
         }
-
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

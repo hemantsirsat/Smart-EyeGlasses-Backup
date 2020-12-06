@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue2"
+    android:background="@color/black"
     tools:context=".OtpActivity">
-
 
     <TextView
         android:id="@+id/OTPVerificationText"
@@ -19,7 +18,7 @@
         android:text="OTP Verification"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/OTPMessage"
@@ -34,7 +33,7 @@
         android:text="@string/OTP_Message"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="15dp" />
 
     <RelativeLayout
@@ -63,10 +62,9 @@
                 android:paddingVertical="20dp"
                 android:textSize="30dp"
                 android:letterSpacing="0.4"
-                android:maxLength="6"/>
+                android:maxLength="6"
+                android:textColor="@color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-
 
     </RelativeLayout>
 

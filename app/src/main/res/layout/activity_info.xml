@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue2"
+    android:background="@color/black"
     tools:context=".InfoActivity">
 
 
@@ -44,6 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress|textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +116,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -137,6 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -173,7 +178,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:maxLength="140"
-                    android:paddingVertical="20dp" />
+                    android:paddingVertical="20dp"
+                    android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -187,11 +193,6 @@
                 android:text="EMERGENCY CONTACT 1"
                 android:layout_margin="20dp"
                 />
-
-
-
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EC1_FNameLayout"
@@ -214,6 +215,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -237,6 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -263,7 +266,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:maxLength="140"
-                    android:paddingVertical="20dp" />
+                    android:paddingVertical="20dp"
+                    android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -289,11 +293,11 @@
                     android:paddingVertical="24dp"
                     android:inputType="number"
                     android:maxLength="10"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!--  _____________________  EMERGENCY CONTACT  2 ____________________ -->
+            <!--  ____________________  EMERGENCY CONTACT  2 ____________________ -->
 
             <TextView
                 android:id="@+id/EC2"
@@ -304,9 +308,6 @@
                 android:text="EMERGENCY CONTACT 2"
                 android:layout_margin="20dp"
                 />
-
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EC2_FNameLayout"
@@ -329,6 +330,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -352,10 +354,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textAutoCorrect"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EC2_Address1Layout"
@@ -378,7 +379,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:maxLength="140"
-                    android:paddingVertical="20dp" />
+                    android:paddingVertical="20dp"
+                    android:textColor="@color/white"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -404,14 +406,9 @@
                     android:paddingVertical="24dp"
                     android:inputType="number"
                     android:maxLength="10"
+                    android:textColor="@color/white"
                     />
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
 
             <Button
                 android:layout_width="wrap_content"
@@ -426,8 +423,5 @@
                 android:textColor="#fff" />
 
         </RelativeLayout>
-
-
     </ScrollView>
-
 </RelativeLayout>

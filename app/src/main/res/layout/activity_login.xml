@@ -4,29 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue2"
+    android:background="@color/black"
     tools:context=".Login">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/icon_bg"
+        android:background="@drawable/ic_login"
         android:layout_alignBottom="@+id/hello"
-        android:layout_toRightOf="@+id/hello"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="50dp"
         />
 
     <TextView
         android:id="@+id/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="280dp"
         android:fontFamily="@font/josefin_sans_bold"
         android:text="@string/loginHello"
         android:layout_marginLeft="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/welcome"
@@ -38,7 +38,7 @@
         android:fontFamily="@font/josefin_sans_semibold"
         android:text="@string/loginWelcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/signInMessage"
@@ -50,7 +50,7 @@
         android:fontFamily="@font/josefin_sans"
         android:text="@string/loginMessage"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="15dp" />
 
 
@@ -77,6 +77,7 @@
             android:paddingVertical="24dp"
             android:inputType="number"
             android:maxLength="10"
+            android:textColor="@color/white"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

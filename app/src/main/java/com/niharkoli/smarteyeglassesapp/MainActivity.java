@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -260,14 +259,26 @@ public class MainActivity extends AppCompatActivity
         super.onPause();
         //tts.stopSpeech();
         preview.stop();
+        Log.i("Camera pause","onPause function");
+        /*Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);*/
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+    @Override
     public void onDestroy() {
         super.onDestroy();
+
         if (cameraSource != null) {
             cameraSource.release();
         }
+        Log.i("Camera Destroy","onDestroy function");
+        /*Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);*/
     }
 
     private String[] getRequiredPermissions() {
